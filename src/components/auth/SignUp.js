@@ -1,5 +1,7 @@
 import React from 'react';
 import useInput from '../../hooks/useInput';
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SignUp = () => {
 
@@ -7,11 +9,13 @@ const SignUp = () => {
     const password = useInput('');
     const firstName = useInput('');
     const lastName = useInput('');
+    const auth = useSelector(state => state.firebase.auth)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(username.value, password.value, firstName.value, password.value)
     }
+    if(auth.uid) return <Navigate to={'/'}/>
     return (
         <div className='container'>
             <form onSubmit={handleSubmit} className="white">

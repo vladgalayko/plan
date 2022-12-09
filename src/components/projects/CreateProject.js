@@ -1,12 +1,14 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import {createProject} from '../store/actions/projectActions'
+import { Navigate } from 'react-router-dom';
 
 const CreateProject = () => {
 
     const title = useInput('');
     const content = useInput('');
+    const auth = useSelector(state => state.firebase.auth);
 
     const dispatch = useDispatch();
 
@@ -19,6 +21,9 @@ const CreateProject = () => {
         // console.log(project)
         dispatch(createProject(project))
     }
+
+    if(!auth.uid) return <Navigate to={'/signin'}/>
+
     return (
         <div className='container'>
             <form onSubmit={handleSubmit} className="white">

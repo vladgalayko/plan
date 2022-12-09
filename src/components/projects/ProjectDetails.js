@@ -3,12 +3,16 @@ import { connect } from 'react-redux/es';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+
 
 
 const ProjectDetails = (props) => {
     const {id} = useParams()
-    const {projects} = props;
+    const {projects, auth} = props;
     
+    
+    if(!auth.uid) return <Navigate to={'/signin'}/>
     
     if (projects) {
         const {title, content, authorFirstName, authorLastName, createdAt} = projects[id];
@@ -37,7 +41,8 @@ const ProjectDetails = (props) => {
 
 const mapStatetoProps = (state) => {
     return {
-        projects: state.firestore.data.projects
+        projects: state.firestore.data.projects,
+        auth: state.firebase.auth
     }
 }
 
