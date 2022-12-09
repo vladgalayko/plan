@@ -7,7 +7,6 @@ import Navbar from './components/layout/Navbar';
 import CreateProject from './components/projects/CreateProject';
 import ProjectDetails from './components/projects/ProjectDetails';
 
-
 const App = () => {
   return (
     <BrowserRouter>

@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProjectList from '../projects/ProjectList';
 import Notifications from './Notifications';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
-import { useContext } from 'react';
-import { Context } from '../..';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 
-const Dashboard = () => {
-    const {auth, firestore} = useContext(Context)
-    const [projects, loading] = useCollectionData(
-        firestore.collection('projects')
-    )
-    console.log(projects)
 
+
+
+
+class Dashboard extends Component {
+    render() {
+        const {projects} = this.props;
     return (
         <div className="dashboard container"> 
             <div className="row">
@@ -25,6 +25,18 @@ const Dashboard = () => {
             </div>
         </div>
     );
-};
+    }
+}
 
-export default Dashboard;
+const mapStatetoProps = (state) => {
+    return {
+        projects: state.firestore.ordered.projects
+    }
+}
+
+export default compose(
+    connect(mapStatetoProps),
+    firestoreConnect([
+        {collection: 'projects'}
+    ])
+)(Dashboard);
