@@ -2,13 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import {createProject} from '../store/actions/projectActions'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CreateProject = () => {
 
     const title = useInput('');
     const content = useInput('');
     const auth = useSelector(state => state.firebase.auth);
+    const navigate = useNavigate()
 
     const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ const CreateProject = () => {
         }
         // console.log(project)
         dispatch(createProject(project))
+        navigate('/')
     }
 
     if(!auth.uid) return <Navigate to={'/signin'}/>
