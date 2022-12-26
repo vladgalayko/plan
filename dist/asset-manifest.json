@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ea4a6daf.css",
+    "main.js": "/static/js/main.d75bbb9e.js",
+    "static/media/mario-bg.png": "/static/media/mario-bg.c9fe338ec386dcd39ce0.png",
+    "index.html": "/index.html",
+    "main.ea4a6daf.css.map": "/static/css/main.ea4a6daf.css.map",
+    "main.d75bbb9e.js.map": "/static/js/main.d75bbb9e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea4a6daf.css",
+    "static/js/main.d75bbb9e.js"
+  ]
+}
